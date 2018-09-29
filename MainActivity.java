@@ -13,20 +13,17 @@ import android.view.WindowManager;
 public class MainActivity extends AppCompatActivity {
 
     private int speed = 10;
+    PlaneView planeView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // setContentView(R.layout.activity_main);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        final PlaneView planeView = new PlaneView(this);
-
+        planeView = new PlaneView(this);
         setContentView(planeView);
         planeView.setBackgroundResource(R.drawable.back);
-
         WindowManager windowManager = getWindowManager();
 
         Display display = windowManager.getDefaultDisplay();
@@ -34,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         DisplayMetrics metrics = new DisplayMetrics();
 
         display.getMetrics(metrics);
-
+        planeView.setFocusable(true);
         planeView.currentX = metrics.widthPixels / 2;
         planeView.currentY = metrics.heightPixels - 50;
         planeView.invalidate();
